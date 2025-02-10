@@ -1,0 +1,129 @@
+---
+title: 'Report 2.1: Hobo measurement campaign - quality control'
+subtitle: 'Environmental Monitoring, Data Analysis and Visualization'
+author: "Chloe Brown"
+date: "16/02/2024"
+format:
+  html:
+    df-print: paged
+    self-contained: true
+    toc: true
+    toc-depth: 3
+    code-block-bg: "#E9E9E9"
+    code-block-border-left: "#D9D9D9"
+  pdf:
+    df-print: kable
+    lof: true
+    lot: true
+execute:
+  echo: true
+  warning: false 
+---
+
+# Setup
+
+```{r}
+#| label: setup
+#| include: false
+
+# setup scripts should go in here if needed
+
+github_dir <- "C:/Path/To/Github/Repository"
+
+```
+
+## Loaded packages
+
+```{r}
+#| label: libraries
+#| warnings: false
+
+# Load all packages here, consider to mute output of this code chunk
+# https://rmarkdown.rstudio.com/lesson-3.html
+require(RPostgreSQL)
+require(getPass)
+library(tidyverse)
+library(lubridate)
+library(zoo)
+
+library(sf)            # <- optional
+library(plotly)        # <- optional
+```
+
+## Preprocessing / R functions
+
+```{r}
+#| label: preprocessing_or_functions
+#| message: false
+#| warning: false
+# If data preprocessing is needed, do it here.
+# If you have specific functions, placed them here.
+# If this code chunk is not needed, delete it.
+```
+
+# 1. Hobo meta information
+
+To compare localized air temperature measurements with those recorded at weather stations, HOBO Pendant temperature/light data loggers were deployed in the Ecosense Forest in Ettenheim, Germany (Fig. 1) and compared with two local stations. The logger was placed 2m above the ground, secured within a spruce tree and shielded from light using an opaque container, open at the bottom (Fig. 2). Nestled close to the trunk of the young tree, the logger was largely protected from wind, which could otherwise affect the *5-minute* temperature readings. However, the string securing the logger’s container to the branch might have allowed movement in strong winds, potentially introducing variability in measurements taken. Additionally, while the container was mostly opaque, prolonged sunlight could still slightly warm it, adding an additional influencing factor. This effect is likely minimal given the measurement period (October–December), when sunlight is weaker, daylight hours are shorter, and the logger's north-easterly placement on the tree's shaded side reduced sun exposure.
+
+![Figure 2. Photo of the HOBO logger in the coniferous tree including the container shading the logger from environmental extremes.](hobo%20pics/chloes_hobo.jpeg)
+
+# 2. Consistent HOBO data file
+
+```{r}
+mins = seq(from = ymd_hm('2024.10.30 00:00'),
+           to = ymd_hm('2025.12.25 23:50'),
+           by = '10 mins')
+
+
+hrs = seq(ymd_hm('2024.10.30 00:00'),
+          ymd_hm('2024.10.30 00:00'),
+          by = '1 hour')
+
+
+```
+
+## 2.1. Calibration
+
+```{r}
+# dummy code
+t_cal <- read.csv( file.path("https://raw.githubusercontent.com/data-hydenv/data/master/hobo", 
+            "2024", "calibration.csv"))
+
+```
+
+
+## 2.2. Create HOBO data file
+
+## 2.3. Verify your file
+
+# 3. Quality control
+
+```{r}
+#|
+```
+
+## 3.1. First impression
+
+```{r}
+
+```
+
+## 3.2. Quality control procedures (QCPs)
+
+### 3.2.1. Measurement range (Plausible values)
+
+### 3.2.2. Plausible rate of change
+
+### 3.2.3. Minimum variability (Persistence)
+
+## 3.3. Summarize
+
+## 3.4. Aggregate
+
+# 4. Fill-up with reference station
+
+## 4.1. Find reference station
+
+## 4.2. Fill-up
+
+## 4.3. upload data
